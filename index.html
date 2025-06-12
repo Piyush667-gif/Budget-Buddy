@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Buddy - Global Financial Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-wallet animated-icon"></i>
+                <h1>Budget Buddy</h1>
+                <span class="subtitle">Global Financial Planner</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="budget">
+                    <i class="fas fa-chart-pie"></i> Budget Planner
+                </button>
+                <button class="nav-btn" data-tab="compare">
+                    <i class="fas fa-city"></i> Cost Compare
+                </button>
+                <button class="nav-btn" data-tab="savings">
+                    <i class="fas fa-piggy-bank"></i> Savings Goal
+                </button>
+                <button class="nav-btn" data-tab="quiz">
+                    <i class="fas fa-brain"></i> EconIQ Quiz
+                </button>
+                <button class="nav-btn" data-tab="local">
+                    <i class="fas fa-map-marker-alt"></i> Spend Local
+                </button>
+                <button class="nav-btn" data-tab="tax">
+                    <i class="fas fa-calculator"></i> Tax Estimator
+                </button>
+                <button class="nav-btn" data-tab="currency">
+                    <i class="fas fa-exchange-alt"></i> Currency
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Budget Planner Tab -->
+            <section id="budget" class="tab-content active">
+                <h2><i class="fas fa-chart-pie animated-icon"></i> Visual Budget Planner</h2>
+                <div class="budget-grid">
+                    <div class="budget-input">
+                        <h3>Monthly Income</h3>
+                        <div class="currency-input">
+                            <select id="budget-currency" class="currency-select">
+                                <option value="USD">USD ($)</option>
+                                <option value="INR">INR (₹)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="JPY">JPY (¥)</option>
+                                <option value="CAD">CAD (C$)</option>
+                            </select>
+                            <input type="number" id="monthly-income" placeholder="Enter monthly income" value="5000">
+                        </div>
+                        
+                        <h3>Expense Categories</h3>
+                        <div class="expense-categories">
+                            <div class="category-item" draggable="true" data-category="housing">
+                                <i class="fas fa-home"></i>
+                                <span>Housing</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                            <div class="category-item" draggable="true" data-category="food">
+                                <i class="fas fa-utensils"></i>
+                                <span>Food</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                            <div class="category-item" draggable="true" data-category="transport">
+                                <i class="fas fa-car"></i>
+                                <span>Transportation</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                            <div class="category-item" draggable="true" data-category="entertainment">
+                                <i class="fas fa-gamepad"></i>
+                                <span>Entertainment</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                            <div class="category-item" draggable="true" data-category="savings">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span>Savings</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                            <div class="category-item" draggable="true" data-category="other">
+                                <i class="fas fa-ellipsis-h"></i>
+                                <span>Other</span>
+                                <input type="number" placeholder="Amount" class="category-input">
+                            </div>
+                        </div>
+                        <div class="budget-alerts" id="budget-alerts"></div>
+                    </div>
+                    <div class="budget-visual">
+                        <canvas id="budget-chart"></canvas>
+                        <div class="budget-summary" id="budget-summary"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cost of Living Comparator -->
+            <section id="compare" class="tab-content">
+                <h2><i class="fas fa-city animated-icon"></i> Global Cost of Living Comparator</h2>
+                <div class="compare-grid">
+                    <div class="city-selector">
+                        <div class="city-select">
+                            <label>City 1:</label>
+                            <select id="city1">
+                                <optgroup label="🇺🇸 United States">
+                                    <option value="newyork">New York, NY</option>
+                                    <option value="losangeles">Los Angeles, CA</option>
+                                    <option value="chicago">Chicago, IL</option>
+                                    <option value="houston">Houston, TX</option>
+                                    <option value="miami">Miami, FL</option>
+                                    <option value="sanfrancisco">San Francisco, CA</option>
+                                    <option value="seattle">Seattle, WA</option>
+                                    <option value="boston">Boston, MA</option>
+                                    <option value="washington">Washington, DC</option>
+                                    <option value="atlanta">Atlanta, GA</option>
+                                </optgroup>
+                                <optgroup label="🇮🇳 India">
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="bangalore">Bangalore</option>
+                                    <option value="hyderabad">Hyderabad</option>
+                                    <option value="chennai">Chennai</option>
+                                    <option value="kolkata">Kolkata</option>
+                                    <option value="pune">Pune</option>
+                                    <option value="ahmedabad">Ahmedabad</option>
+                                    <option value="jaipur">Jaipur</option>
+                                    <option value="surat">Surat</option>
+                                    <option value="lucknow">Lucknow</option>
+                                    <option value="kanpur">Kanpur</option>
+                                    <option value="nagpur">Nagpur</option>
+                                    <option value="indore">Indore</option>
+                                    <option value="thane">Thane</option>
+                                    <option value="bhopal">Bhopal</option>
+                                    <option value="visakhapatnam">Visakhapatnam</option>
+                                    <option value="pimpri">Pimpri-Chinchwad</option>
+                                    <option value="patna">Patna</option>
+                                    <option value="vadodara">Vadodara</option>
+                                    <option value="ghaziabad">Ghaziabad</option>
+                                    <option value="ludhiana">Ludhiana</option>
+                                    <option value="agra">Agra</option>
+                                    <option value="nashik">Nashik</option>
+                                    <option value="faridabad">Faridabad</option>
+                                    <option value="meerut">Meerut</option>
+                                    <option value="rajkot">Rajkot</option>
+                                    <option value="kalyan">Kalyan-Dombivali</option>
+                                    <option value="vasai">Vasai-Virar</option>
+                                    <option value="varanasi">Varanasi</option>
+                                    <option value="srinagar">Srinagar</option>
+                                    <option value="aurangabad">Aurangabad</option>
+                                    <option value="dhanbad">Dhanbad</option>
+                                    <option value="amritsar">Amritsar</option>
+                                    <option value="navi_mumbai">Navi Mumbai</option>
+                                    <option value="allahabad">Allahabad</option>
+                                    <option value="ranchi">Ranchi</option>
+                                    <option value="howrah">Howrah</option>
+                                    <option value="coimbatore">Coimbatore</option>
+                                    <option value="jabalpur">Jabalpur</option>
+                                    <option value="gwalior">Gwalior</option>
+                                    <option value="vijayawada">Vijayawada</option>
+                                    <option value="jodhpur">Jodhpur</option>
+                                    <option value="madurai">Madurai</option>
+                                    <option value="raipur">Raipur</option>
+                                    <option value="kota">Kota</option>
+                                    <option value="guwahati">Guwahati</option>
+                                    <option value="chandigarh">Chandigarh</option>
+                                    <option value="solapur">Solapur</option>
+                                    <option value="hubli">Hubli-Dharwad</option>
+                                    <option value="bareilly">Bareilly</option>
+                                    <option value="moradabad">Moradabad</option>
+                                    <option value="mysore">Mysore</option>
+                                    <option value="gurgaon">Gurgaon</option>
+                                    <option value="aligarh">Aligarh</option>
+                                    <option value="jalandhar">Jalandhar</option>
+                                    <option value="tiruchirappalli">Tiruchirappalli</option>
+                                    <option value="bhubaneswar">Bhubaneswar</option>
+                                    <option value="salem">Salem</option>
+                                    <option value="warangal">Warangal</option>
+                                    <option value="mira">Mira-Bhayandar</option>
+                                    <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                                    <option value="bhiwandi">Bhiwandi</option>
+                                    <option value="saharanpur">Saharanpur</option>
+                                    <option value="guntur">Guntur</option>
+                                    <option value="amravati">Amravati</option>
+                                    <option value="bikaner">Bikaner</option>
+                                    <option value="noida">Noida</option>
+                                    <option value="jamshedpur">Jamshedpur</option>
+                                    <option value="bhilai">Bhilai Nagar</option>
+                                    <option value="cuttack">Cuttack</option>
+                                    <option value="firozabad">Firozabad</option>
+                                    <option value="kochi">Kochi</option>
+                                    <option value="bhavnagar">Bhavnagar</option>
+                                    <option value="dehradun">Dehradun</option>
+                                    <option value="durgapur">Durgapur</option>
+                                    <option value="asansol">Asansol</option>
+                                    <option value="nanded">Nanded</option>
+                                    <option value="kolhapur">Kolhapur</option>
+                                    <option value="ajmer">Ajmer</option>
+                                    <option value="gulbarga">Gulbarga</option>
+                                    <option value="jamnagar">Jamnagar</option>
+                                    <option value="ujjain">Ujjain</option>
+                                    <option value="loni">Loni</option>
+                                    <option value="siliguri">Siliguri</option>
+                                    <option value="jhansi">Jhansi</option>
+                                    <option value="ulhasnagar">Ulhasnagar</option>
+                                    <option value="nellore">Nellore</option>
+                                    <option value="jammu">Jammu</option>
+                                    <option value="sangli">Sangli-Miraj & Kupwad</option>
+                                    <option value="mangalore">Mangalore</option>
+                                    <option value="erode">Erode</option>
+                                    <option value="belgaum">Belgaum</option>
+                                    <option value="ambattur">Ambattur</option>
+                                    <option value="tirunelveli">Tirunelveli</option>
+                                    <option value="malegaon">Malegaon</option>
+                                    <option value="gaya">Gaya</option>
+                                    <option value="jalgaon">Jalgaon</option>
+                                    <option value="udaipur">Udaipur</option>
+                                    <option value="maheshtala">Maheshtala</option>
+                                </optgroup>
+                                <optgroup label="🇬🇧 United Kingdom">
+                                    <option value="london">London</option>
+                                    <option value="manchester">Manchester</option>
+                                    <option value="birmingham">Birmingham</option>
+                                    <option value="edinburgh">Edinburgh</option>
+                                    <option value="glasgow">Glasgow</option>
+                                    <option value="liverpool">Liverpool</option>
+                                    <option value="bristol">Bristol</option>
+                                </optgroup>
+                                <optgroup label="🇨🇦 Canada">
+                                    <option value="toronto">Toronto</option>
+                                    <option value="vancouver">Vancouver</option>
+                                    <option value="montreal">Montreal</option>
+                                    <option value="calgary">Calgary</option>
+                                    <option value="ottawa">Ottawa</option>
+                                    <option value="edmonton">Edmonton</option>
+                                </optgroup>
+                                <optgroup label="🇦🇺 Australia">
+                                    <option value="sydney">Sydney</option>
+                                    <option value="melbourne">Melbourne</option>
+                                    <option value="brisbane">Brisbane</option>
+                                    <option value="perth">Perth</option>
+                                    <option value="adelaide">Adelaide</option>
+                                    <option value="canberra">Canberra</option>
+                                </optgroup>
+                                <optgroup label="🇩🇪 Germany">
+                                    <option value="berlin">Berlin</option>
+                                    <option value="munich">Munich</option>
+                                    <option value="hamburg">Hamburg</option>
+                                    <option value="cologne">Cologne</option>
+                                    <option value="frankfurt">Frankfurt</option>
+                                    <option value="stuttgart">Stuttgart</option>
+                                </optgroup>
+                                <optgroup label="🇫🇷 France">
+                                    <option value="paris">Paris</option>
+                                    <option value="marseille">Marseille</option>
+                                    <option value="lyon">Lyon</option>
+                                    <option value="toulouse">Toulouse</option>
+                                    <option value="nice">Nice</option>
+                                    <option value="nantes">Nantes</option>
+                                </optgroup>
+                                <optgroup label="🇮🇹 Italy">
+                                    <option value="rome">Rome</option>
+                                    <option value="milan">Milan</option>
+                                    <option value="naples">Naples</option>
+                                    <option value="turin">Turin</option>
+                                    <option value="florence">Florence</option>
+                                    <option value="venice">Venice</option>
+                                </optgroup>
+                                <optgroup label="🇪🇸 Spain">
+                                    <option value="madrid">Madrid</option>
+                                    <option value="barcelona">Barcelona</option>
+                                    <option value="valencia">Valencia</option>
+                                    <option value="seville">Seville</option>
+                                    <option value="bilbao">Bilbao</option>
+                                    <option value="malaga">Malaga</option>
+                                </optgroup>
+                                <optgroup label="🇳🇱 Netherlands">
+                                    <option value="amsterdam">Amsterdam</option>
+                                    <option value="rotterdam">Rotterdam</option>
+                                    <option value="thehague">The Hague</option>
+                                    <option value="utrecht">Utrecht</option>
+                                    <option value="eindhoven">Eindhoven</option>
+                                </optgroup>
+                                <optgroup label="🇨🇭 Switzerland">
+                                    <option value="zurich">Zurich</option>
+                                    <option value="geneva">Geneva</option>
+                                    <option value="basel">Basel</option>
+                                    <option value="bern">Bern</option>
+                                    <option value="lausanne">Lausanne</option>
+                                </optgroup>
+                                <optgroup label="🇸🇪 Sweden">
+                                    <option value="stockholm">Stockholm</option>
+                                    <option value="gothenburg">Gothenburg</option>
+                                    <option value="malmo">Malmö</option>
+                                    <option value="uppsala">Uppsala</option>
+                                </optgroup>
+                                <optgroup label="🇳🇴 Norway">
+                                    <option value="oslo">Oslo</option>
+                                    <option value="bergen">Bergen</option>
+                                    <option value="trondheim">Trondheim</option>
+                                    <option value="stavanger">Stavanger</option>
+                                </optgroup>
+                                <optgroup label="🇩🇰 Denmark">
+                                    <option value="copenhagen">Copenhagen</option>
+                                    <option value="aarhus">Aarhus</option>
+                                    <option value="odense">Odense</option>
+                                    <option value="aalborg">Aalborg</option>
+                                </optgroup>
+                                <optgroup label="🇯🇵 Japan">
+                                    <option value="tokyo">Tokyo</option>
+                                    <option value="osaka">Osaka</option>
+                                    <option value="kyoto">Kyoto</option>
+                                    <option value="yokohama">Yokohama</option>
+                                    <option value="nagoya">Nagoya</option>
+                                    <option value="sapporo">Sapporo</option>
+                                </optgroup>
+                                <optgroup label="🇰🇷 South Korea">
+                                    <option value="seoul">Seoul</option>
+                                    <option value="busan">Busan</option>
+                                    <option value="incheon">Incheon</option>
+                                    <option value="daegu">Daegu</option>
+                                    <option value="daejeon">Daejeon</option>
+                                </optgroup>
+                                <optgroup label="🇨🇳 China">
+                                    <option value="beijing">Beijing</option>
+                                    <option value="shanghai">Shanghai</option>
+                                    <option value="guangzhou">Guangzhou</option>
+                                    <option value="shenzhen">Shenzhen</option>
+                                    <option value="chengdu">Chengdu</option>
+                                    <option value="hangzhou">Hangzhou</option>
+                                </optgroup>
+                                <optgroup label="🇸🇬 Singapore">
+                                    <option value="singapore">Singapore</option>
+                                </optgroup>
+                                <optgroup label="🇭🇰 Hong Kong">
+                                    <option value="hongkong">Hong Kong</option>
+                                </optgroup>
+                                <optgroup label="🇹🇭 Thailand">
+                                    <option value="bangkok">Bangkok</option>
+                                    <option value="chiangmai">Chiang Mai</option>
+                                    <option value="phuket">Phuket</option>
+                                    <option value="pattaya">Pattaya</option>
+                                </optgroup>
+                                <optgroup label="🇲🇾 Malaysia">
+                                    <option value="kualalumpur">Kuala Lumpur</option>
+                                    <option value="penang">Penang</option>
+                                    <option value="johor">Johor Bahru</option>
+                                </optgroup>
+                                <optgroup label="🇮🇩 Indonesia">
+                                    <option value="jakarta">Jakarta</option>
+                                    <option value="bali">Bali</option>
+                                    <option value="surabaya">Surabaya</option>
+                                    <option value="bandung">Bandung</option>
+                                </optgroup>
+                                <optgroup label="🇵🇭 Philippines">
+                                    <option value="manila">Manila</option>
+                                    <option value="cebu">Cebu</option>
+                                    <option value="davao">Davao</option>
+                                </optgroup>
+                                <optgroup label="🇻🇳 Vietnam">
+                                    <option value="hochiminh">Ho Chi Minh City</option>
+                                    <option value="hanoi">Hanoi</option>
+                                    <option value="danang">Da Nang</option>
+                                </optgroup>
+                                <optgroup label="🇧🇷 Brazil">
+                                    <option value="saopaulo">São Paulo</option>
+                                    <option value="riodejaneiro">Rio de Janeiro</option>
+                                    <option value="brasilia">Brasília</option>
+                                    <option value="salvador">Salvador</option>
+                                    <option value="fortaleza">Fortaleza</option>
+                                </optgroup>
+                                <optgroup label="🇦🇷 Argentina">
+                                    <option value="buenosaires">Buenos Aires</option>
+                                    <option value="cordoba">Córdoba</option>
+                                    <option value="rosario">Rosario</option>
+                                    <option value="mendoza">Mendoza</option>
+                                </optgroup>
+                                <optgroup label="🇲🇽 Mexico">
+                                    <option value="mexicocity">Mexico City</option>
+                                    <option value="guadalajara">Guadalajara</option>
+                                    <option value="monterrey">Monterrey</option>
+                                    <option value="cancun">Cancún</option>
+                                    <option value="tijuana">Tijuana</option>
+                                </optgroup>
+                                <optgroup label="🇨🇱 Chile">
+                                    <option value="santiago">Santiago</option>
+                                    <option value="valparaiso">Valparaíso</option>
+                                    <option value="concepcion">Concepción</option>
+                                </optgroup>
+                                <optgroup label="🇨🇴 Colombia">
+                                    <option value="bogota">Bogotá</option>
+                                    <option value="medellin">Medellín</option>
+                                    <option value="cali">Cali</option>
+                                    <option value="cartagena">Cartagena</option>
+                                </optgroup>
+                                <optgroup label="🇿🇦 South Africa">
+                                    <option value="capetown">Cape Town</option>
+                                    <option value="johannesburg">Johannesburg</option>
+                                    <option value="durban">Durban</option>
+                                    <option value="pretoria">Pretoria</option>
+                                </optgroup>
+                                <optgroup label="🇪🇬 Egypt">
+                                    <option value="cairo">Cairo</option>
+                                    <option value="alexandria">Alexandria</option>
+                                    <option value="giza">Giza</option>
+                                </optgroup>
+                                <optgroup label="🇦🇪 UAE">
+                                    <option value="dubai">Dubai</option>
+                                    <option value="abudhabi">Abu Dhabi</option>
+                                    <option value="sharjah">Sharjah</option>
+                                </optgroup>
+                                <optgroup label="🇸🇦 Saudi Arabia">
+                                    <option value="riyadh">Riyadh</option>
+                                    <option value="jeddah">Jeddah</option>
+                                    <option value="dammam">Dammam</option>
+                                </optgroup>
+                                <optgroup label="🇹🇷 Turkey">
+                                    <option value="istanbul">Istanbul</option>
+                                    <option value="ankara">Ankara</option>
+                                    <option value="izmir">Izmir</option>
+                                    <option value="antalya">Antalya</option>
+                                </optgroup>
+                                <optgroup label="🇷🇺 Russia">
+                                    <option value="moscow">Moscow</option>
+                                    <option value="stpetersburg">St. Petersburg</option>
+                                    <option value="novosibirsk">Novosibirsk</option>
+                                    <option value="yekaterinburg">Yekaterinburg</option>
+                                </optgroup>
+                                <optgroup label="🇺🇦 Ukraine">
+                                    <option value="kyiv">Kyiv</option>
+                                    <option value="kharkiv">Kharkiv</option>
+                                    <option value="odesa">Odesa</option>
+                                    <option value="lviv">Lviv</option>
+                                </optgroup>
+                                <optgroup label="🇵🇱 Poland">
+                                    <option value="warsaw">Warsaw</option>
+                                    <option value="krakow">Kraków</option>
+                                    <option value="gdansk">Gdańsk</option>
+                                    <option value="wroclaw">Wrocław</option>
+                                </optgroup>
+                                <optgroup label="🇨🇿 Czech Republic">
+                                    <option value="prague">Prague</option>
+                                    <option value="brno">Brno</option>
+                                    <option value="ostrava">Ostrava</option>
+                                </optgroup>
+                                <optgroup label="🇭🇺 Hungary">
+                                    <option value="budapest">Budapest</option>
+                                    <option value="debrecen">Debrecen</option>
+                                    <option value="szeged">Szeged</option>
+                                </optgroup>
+                                <optgroup label="🇷🇴 Romania">
+                                    <option value="bucharest">Bucharest</option>
+                                    <option value="cluj">Cluj-Napoca</option>
+                                    <option value="timisoara">Timișoara</option>
+                                </optgroup>
+                                <optgroup label="🇬🇷 Greece">
+                                    <option value="athens">Athens</option>
+                                    <option value="thessaloniki">Thessaloniki</option>
+                                    <option value="patras">Patras</option>
+                                </optgroup>
+                                <optgroup label="🇵🇹 Portugal">
+                                    <option value="lisbon">Lisbon</option>
+                                    <option value="porto">Porto</option>
+                                    <option value="braga">Braga</option>
+                                </optgroup>
+                                <optgroup label="🇮🇪 Ireland">
+                                    <option value="dublin">Dublin</option>
+                                    <option value="cork">Cork</option>
+                                    <option value="galway">Galway</option>
+                                </optgroup>
+                                <optgroup label="🇧🇪 Belgium">
+                                    <option value="brussels">Brussels</option>
+                                    <option value="antwerp">Antwerp</option>
+                                    <option value="ghent">Ghent</option>
+                                </optgroup>
+                                <optgroup label="🇦🇹 Austria">
+                                    <option value="vienna">Vienna</option>
+                                    <option value="salzburg">Salzburg</option>
+                                    <option value="innsbruck">Innsbruck</option>
+                                </optgroup>
+                                <optgroup label="🇫🇮 Finland">
+                                    <option value="helsinki">Helsinki</option>
+                                    <option value="tampere">Tampere</option>
+                                    <option value="turku">Turku</option>
+                                </optgroup>
+                                <optgroup label="🇮🇱 Israel">
+                                    <option value="telaviv">Tel Aviv</option>
+                                    <option value="jerusalem">Jerusalem</option>
+                                    <option value="haifa">Haifa</option>
+                                </optgroup>
+                                <optgroup label="🇳🇿 New Zealand">
+                                    <option value="auckland">Auckland</option>
+                                    <option value="wellington">Wellington</option>
+                                    <option value="christchurch">Christchurch</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="city-select">
+                            <label>City 2:</label>
+                            <select id="city2">
+                                <!-- Same options as city1 -->
+                                <optgroup label="🇺🇸 United States">
+                                    <option value="losangeles">Los Angeles, CA</option>
+                                    <option value="newyork">New York, NY</option>
+                                    <option value="chicago">Chicago, IL</option>
+                                    <option value="houston">Houston, TX</option>
+                                    <option value="miami">Miami, FL</option>
+                                    <option value="sanfrancisco">San Francisco, CA</option>
+                                    <option value="seattle">Seattle, WA</option>
+                                    <option value="boston">Boston, MA</option>
+                                    <option value="washington">Washington, DC</option>
+                                    <option value="atlanta">Atlanta, GA</option>
+                                </optgroup>
+                                <optgroup label="🇮🇳 India">
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="bangalore">Bangalore</option>
+                                    <option value="hyderabad">Hyderabad</option>
+                                    <option value="chennai">Chennai</option>
+                                    <option value="kolkata">Kolkata</option>
+                                    <option value="pune">Pune</option>
+                                    <option value="ahmedabad">Ahmedabad</option>
+                                    <option value="jaipur">Jaipur</option>
+                                    <option value="surat">Surat</option>
+                                    <option value="lucknow">Lucknow</option>
+                                    <option value="kanpur">Kanpur</option>
+                                    <option value="nagpur">Nagpur</option>
+                                    <option value="indore">Indore</option>
+                                    <option value="thane">Thane</option>
+                                    <option value="bhopal">Bhopal</option>
+                                    <option value="visakhapatnam">Visakhapatnam</option>
+                                    <option value="pimpri">Pimpri-Chinchwad</option>
+                                    <option value="patna">Patna</option>
+                                    <option value="vadodara">Vadodara</option>
+                                    <option value="ghaziabad">Ghaziabad</option>
+                                    <option value="ludhiana">Ludhiana</option>
+                                    <option value="agra">Agra</option>
+                                    <option value="nashik">Nashik</option>
+                                    <option value="faridabad">Faridabad</option>
+                                    <option value="meerut">Meerut</option>
+                                    <option value="rajkot">Rajkot</option>
+                                    <option value="kalyan">Kalyan-Dombivali</option>
+                                    <option value="vasai">Vasai-Virar</option>
+                                    <option value="varanasi">Varanasi</option>
+                                    <option value="srinagar">Srinagar</option>
+                                    <option value="aurangabad">Aurangabad</option>
+                                    <option value="dhanbad">Dhanbad</option>
+                                    <option value="amritsar">Amritsar</option>
+                                    <option value="navi_mumbai">Navi Mumbai</option>
+                                    <option value="allahabad">Allahabad</option>
+                                    <option value="ranchi">Ranchi</option>
+                                    <option value="howrah">Howrah</option>
+                                    <option value="coimbatore">Coimbatore</option>
+                                    <option value="jabalpur">Jabalpur</option>
+                                    <option value="gwalior">Gwalior</option>
+                                    <option value="vijayawada">Vijayawada</option>
+                                    <option value="jodhpur">Jodhpur</option>
+                                    <option value="madurai">Madurai</option>
+                                    <option value="raipur">Raipur</option>
+                                    <option value="kota">Kota</option>
+                                    <option value="guwahati">Guwahati</option>
+                                    <option value="chandigarh">Chandigarh</option>
+                                    <option value="solapur">Solapur</option>
+                                    <option value="hubli">Hubli-Dharwad</option>
+                                    <option value="bareilly">Bareilly</option>
+                                    <option value="moradabad">Moradabad</option>
+                                    <option value="mysore">Mysore</option>
+                                    <option value="gurgaon">Gurgaon</option>
+                                    <option value="aligarh">Aligarh</option>
+                                    <option value="jalandhar">Jalandhar</option>
+                                    <option value="tiruchirappalli">Tiruchirappalli</option>
+                                    <option value="bhubaneswar">Bhubaneswar</option>
+                                    <option value="salem">Salem</option>
+                                    <option value="warangal">Warangal</option>
+                                    <option value="mira">Mira-Bhayandar</option>
+                                    <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                                    <option value="bhiwandi">Bhiwandi</option>
+                                    <option value="saharanpur">Saharanpur</option>
+                                    <option value="guntur">Guntur</option>
+                                    <option value="amravati">Amravati</option>
+                                    <option value="bikaner">Bikaner</option>
+                                    <option value="noida">Noida</option>
+                                    <option value="jamshedpur">Jamshedpur</option>
+                                    <option value="bhilai">Bhilai Nagar</option>
+                                    <option value="cuttack">Cuttack</option>
+                                    <option value="firozabad">Firozabad</option>
+                                    <option value="kochi">Kochi</option>
+                                    <option value="bhavnagar">Bhavnagar</option>
+                                    <option value="dehradun">Dehradun</option>
+                                    <option value="durgapur">Durgapur</option>
+                                    <option value="asansol">Asansol</option>
+                                    <option value="nanded">Nanded</option>
+                                    <option value="kolhapur">Kolhapur</option>
+                                    <option value="ajmer">Ajmer</option>
+                                    <option value="gulbarga">Gulbarga</option>
+                                    <option value="jamnagar">Jamnagar</option>
+                                    <option value="ujjain">Ujjain</option>
+                                    <option value="loni">Loni</option>
+                                    <option value="siliguri">Siliguri</option>
+                                    <option value="jhansi">Jhansi</option>
+                                    <option value="ulhasnagar">Ulhasnagar</option>
+                                    <option value="nellore">Nellore</option>
+                                    <option value="jammu">Jammu</option>
+                                    <option value="sangli">Sangli-Miraj & Kupwad</option>
+                                    <option value="mangalore">Mangalore</option>
+                                    <option value="erode">Erode</option>
+                                    <option value="belgaum">Belgaum</option>
+                                    <option value="ambattur">Ambattur</option>
+                                    <option value="tirunelveli">Tirunelveli</option>
+                                    <option value="malegaon">Malegaon</option>
+                                    <option value="gaya">Gaya</option>
+                                    <option value="jalgaon">Jalgaon</option>
+                                    <option value="udaipur">Udaipur</option>
+                                    <option value="maheshtala">Maheshtala</option>
+                                </optgroup>
+                                <!-- Add all other country optgroups here (same as city1) -->
+                            </select>
+                        </div>
+                        <button onclick="compareCities()" class="btn-primary">Compare Cities</button>
+                    </div>
+                    <div class="compare-results">
+                        <canvas id="compare-chart"></canvas>
+                        <div id="compare-details"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Savings Goal Tracker -->
+            <section id="savings" class="tab-content">
+                <h2><i class="fas fa-piggy-bank animated-icon"></i> Savings Goal Tracker</h2>
+                <div class="savings-container">
+                    <div class="goal-setup">
+                        <h3>Set Your Goal</h3>
+                        <input type="text" id="goal-name" placeholder="Goal name (e.g., New Laptop)">
+                        <div class="currency-input">
+                            <select id="goal-currency" class="currency-select">
+                                <option value="USD">USD ($)</option>
+                                <option value="INR">INR (₹)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="JPY">JPY (¥)</option>
+                                <option value="CAD">CAD (C$)</option>
+                            </select>
+                            <input type="number" id="goal-amount" placeholder="Target amount">
+                        </div>
+                        <input type="number" id="monthly-saving" placeholder="Monthly saving">
+                        <button onclick="setGoal()" class="btn-primary">Set Goal</button>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="goal-info" id="goal-info"></div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="progress-text" id="progress-text">0%</div>
+                        </div>
+                        <div class="milestones" id="milestones"></div>
+                        <div class="savings-tips" id="savings-tips"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EconIQ Quiz -->
+            <section id="quiz" class="tab-content">
+                <h2><i class="fas fa-brain animated-icon"></i> EconIQ: Economics Quiz</h2>
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <div class="score">Score: <span id="quiz-score">0</span></div>
+                        <div class="streak">Streak: <span id="quiz-streak">0</span></div>
+                    </div>
+                    <div class="quiz-content" id="quiz-content">
+                        <button onclick="startQuiz()" class="btn-primary">Start Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Spend Local Map -->
+            <section id="local" class="tab-content">
+                <h2><i class="fas fa-map-marker-alt animated-icon"></i> Spend Local Impact</h2>
+                <div class="local-container">
+                    <div class="impact-calculator">
+                        <h3>Calculate Local Impact</h3>
+                        <div class="currency-input">
+                            <select id="local-currency" class="currency-select">
+                                <option value="USD">USD ($)</option>
+                                <option value="INR">INR (₹)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="JPY">JPY (¥)</option>
+                                <option value="CAD">CAD (C$)</option>
+                            </select>
+                            <input type="number" id="local-amount" placeholder="Amount spent" value="100">
+                        </div>
+                        <div class="business-type">
+                            <label>
+                                <input type="radio" name="business" value="local" checked>
+                                Local Business
+                            </label>
+                            <label>
+                                <input type="radio" name="business" value="chain">
+                                Chain Store
+                            </label>
+                        </div>
+                        <button onclick="calculateImpact()" class="btn-primary">Calculate Impact</button>
+                    </div>
+                    <div class="impact-visual">
+                        <canvas id="impact-chart"></canvas>
+                        <div class="impact-details" id="impact-details"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tax Estimator -->
+            <section id="tax" class="tab-content">
+                <h2><i class="fas fa-calculator animated-icon"></i> Tax Estimator</h2>
+                <div class="tax-container">
+                    <div class="tax-input">
+                        <h3>Income Information</h3>
+                        <div class="currency-input">
+                            <select id="tax-currency" class="currency-select">
+                                <option value="USD">USD ($)</option>
+                                <option value="INR">INR (₹)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="JPY">JPY (¥)</option>
+                                <option value="CAD">CAD (C$)</option>
+                            </select>
+                            <input type="number" id="annual-income" placeholder="Annual Income">
+                        </div>
+                        <select id="filing-status">
+                            <option value="single">Single</option>
+                            <option value="married">Married Filing Jointly</option>
+                            <option value="head">Head of Household</option>
+                        </select>
+                        <input type="number" id="deductions" placeholder="Deductions" value="12950">
+                        <button onclick="calculateTax()" class="btn-primary">Calculate Tax</button>
+                    </div>
+                    <div class="tax-results">
+                        <canvas id="tax-chart"></canvas>
+                        <div class="tax-breakdown" id="tax-breakdown"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Currency Exchange -->
+            <section id="currency" class="tab-content">
+                <h2><i class="fas fa-exchange-alt animated-icon"></i> Global Currency Exchange</h2>
+                <div class="currency-container">
+                    <div class="exchange-calculator">
+                        <h3>Currency Converter</h3>
+                        <input type="number" id="amount" placeholder="Amount" value="100">
+                        <select id="from-currency">
+                            <optgroup label="Major Currencies">
+                                <option value="USD">USD - US Dollar ($)</option>
+                                <option value="EUR">EUR - Euro (€)</option>
+                                <option value="GBP">GBP - British Pound (£)</option>
+                                <option value="JPY">JPY - Japanese Yen (¥)</option>
+                                <option value="CNY">CNY - Chinese Yuan (¥)</option>
+                                <option value="INR">INR - Indian Rupee (₹)</option>
+                                <option value="CAD">CAD - Canadian Dollar (C$)</option>
+                                <option value="AUD">AUD - Australian Dollar (A$)</option>
+                                <option value="CHF">CHF - Swiss Franc (CHF)</option>
+                                <option value="SEK">SEK - Swedish Krona (kr)</option>
+                            </optgroup>
+                            <optgroup label="Asian Currencies">
+                                <option value="KRW">KRW - South Korean Won (₩)</option>
+                                <option value="SGD">SGD - Singapore Dollar (S$)</option>
+                                <option value="HKD">HKD - Hong Kong Dollar (HK$)</option>
+                                <option value="THB">THB - Thai Baht (฿)</option>
+                                <option value="MYR">MYR - Malaysian Ringgit (RM)</option>
+                                <option value="IDR">IDR - Indonesian Rupiah (Rp)</option>
+                                <option value="PHP">PHP - Philippine Peso (₱)</option>
+                                <option value="VND">VND - Vietnamese Dong (₫)</option>
+                                <option value="TWD">TWD - Taiwan Dollar (NT$)</option>
+                                <option value="PKR">PKR - Pakistani Rupee (₨)</option>
+                                <option value="BDT">BDT - Bangladeshi Taka (৳)</option>
+                                <option value="LKR">LKR - Sri Lankan Rupee (Rs)</option>
+                            </optgroup>
+                            <optgroup label="European Currencies">
+                                <option value="NOK">NOK - Norwegian Krone (kr)</option>
+                                <option value="DKK">DKK - Danish Krone (kr)</option>
+                                <option value="PLN">PLN - Polish Złoty (zł)</option>
+                                <option value="CZK">CZK - Czech Koruna (Kč)</option>
+                                <option value="HUF">HUF - Hungarian Forint (Ft)</option>
+                                <option value="RON">RON - Romanian Leu (lei)</option>
+                                <option value="BGN">BGN - Bulgarian Lev (лв)</option>
+                                <option value="HRK">HRK - Croatian Kuna (kn)</option>
+                                <option value="RSD">RSD - Serbian Dinar (дин)</option>
+                                <option value="UAH">UAH - Ukrainian Hryvnia (₴)</option>
+                                <option value="RUB">RUB - Russian Ruble (₽)</option>
+                                <option value="TRY">TRY - Turkish Lira (₺)</option>
+                            </optgroup>
+                            <optgroup label="Middle East & Africa">
+                                <option value="AED">AED - UAE Dirham (د.إ)</option>
+                                <option value="SAR">SAR - Saudi Riyal (﷼)</option>
+                                <option value="QAR">QAR - Qatari Riyal (﷼)</option>
+                                <option value="KWD">KWD - Kuwaiti Dinar (د.ك)</option>
+                                <option value="BHD">BHD - Bahraini Dinar (.د.ب)</option>
+                                <option value="OMR">OMR - Omani Rial (﷼)</option>
+                                <option value="JOD">JOD - Jordanian Dinar (د.ا)</option>
+                                <option value="LBP">LBP - Lebanese Pound (ل.ل)</option>
+                                <option value="ILS">ILS - Israeli Shekel (₪)</option>
+                                <option value="EGP">EGP - Egyptian Pound (£)</option>
+                                <option value="ZAR">ZAR - South African Rand (R)</option>
+                                <option value="NGN">NGN - Nigerian Naira (₦)</option>
+                                <option value="KES">KES - Kenyan Shilling (KSh)</option>
+                                <option value="GHS">GHS - Ghanaian Cedi (₵)</option>
+                                <option value="MAD">MAD - Moroccan Dirham (د.م.)</option>
+                                <option value="TND">TND - Tunisian Dinar (د.ت)</option>
+                            </optgroup>
+                            <optgroup label="Americas">
+                                <option value="MXN">MXN - Mexican Peso ($)</option>
+                                <option value="BRL">BRL - Brazilian Real (R$)</option>
+                                <option value="ARS">ARS - Argentine Peso ($)</option>
+                                <option value="CLP">CLP - Chilean Peso ($)</option>
+                                <option value="COP">COP - Colombian Peso ($)</option>
+                                <option value="PEN">PEN - Peruvian Sol (S/)</option>
+                                <option value="UYU">UYU - Uruguayan Peso ($U)</option>
+                                <option value="BOB">BOB - Bolivian Boliviano (Bs.)</option>
+                                <option value="PYG">PYG - Paraguayan Guaraní (₲)</option>
+                                <option value="VES">VES - Venezuelan Bolívar (Bs.S)</option>
+                                <option value="GTQ">GTQ - Guatemalan Quetzal (Q)</option>
+                                <option value="CRC">CRC - Costa Rican Colón (₡)</option>
+                                <option value="DOP">DOP - Dominican Peso (RD$)</option>
+                                <option value="JMD">JMD - Jamaican Dollar (J$)</option>
+                            </optgroup>
+                            <optgroup label="Oceania">
+                                <option value="NZD">NZD - New Zealand Dollar (NZ$)</option>
+                                <option value="FJD">FJD - Fijian Dollar (FJ$)</option>
+                                <option value="PGK">PGK - Papua New Guinea Kina (K)</option>
+                                <option value="SBD">SBD - Solomon Islands Dollar (SI$)</option>
+                                <option value="VUV">VUV - Vanuatu Vatu (VT)</option>
+                                <option value="WST">WST - Samoan Tala (WS$)</option>
+                                <option value="TOP">TOP - Tongan Paʻanga (T$)</option>
+                            </optgroup>
+                            <optgroup label="Cryptocurrencies">
+                                <option value="BTC">BTC - Bitcoin (₿)</option>
+                                <option value="ETH">ETH - Ethereum (Ξ)</option>
+                                <option value="BNB">BNB - Binance Coin (BNB)</option>
+                                <option value="ADA">ADA - Cardano (₳)</option>
+                                <option value="DOT">DOT - Polkadot (DOT)</option>
+                                <option value="XRP">XRP - Ripple (XRP)</option>
+                                <option value="LTC">LTC - Litecoin (Ł)</option>
+                                <option value="BCH">BCH - Bitcoin Cash (BCH)</option>
+                                <option value="LINK">LINK - Chainlink (LINK)</option>
+                                <option value="MATIC">MATIC - Polygon (MATIC)</option>
+                            </optgroup>
+                        </select>
+                        <i class="fas fa-exchange-alt exchange-icon"></i>
+                        <select id="to-currency">
+                            <optgroup label="Major Currencies">
+                                <option value="EUR">EUR - Euro (€)</option>
+                                <option value="USD">USD - US Dollar ($)</option>
+                                <option value="GBP">GBP - British Pound (£)</option>
+                                <option value="JPY">JPY - Japanese Yen (¥)</option>
+                                <option value="CNY">CNY - Chinese Yuan (¥)</option>
+                                <option value="INR">INR - Indian Rupee (₹)</option>
+                                <option value="CAD">CAD - Canadian Dollar (C$)</option>
+                                <option value="AUD">AUD - Australian Dollar (A$)</option>
+                                <option value="CHF">CHF - Swiss Franc (CHF)</option>
+                                <option value="SEK">SEK - Swedish Krona (kr)</option>
+                            </optgroup>
+                            <optgroup label="Asian Currencies">
+                                <option value="KRW">KRW - South Korean Won (₩)</option>
+                                <option value="SGD">SGD - Singapore Dollar (S$)</option>
+                                <option value="HKD">HKD - Hong Kong Dollar (HK$)</option>
+                                <option value="THB">THB - Thai Baht (฿)</option>
+                                <option value="MYR">MYR - Malaysian Ringgit (RM)</option>
+                                <option value="IDR">IDR - Indonesian Rupiah (Rp)</option>
+                                <option value="PHP">PHP - Philippine Peso (₱)</option>
+                                <option value="VND">VND - Vietnamese Dong (₫)</option>
+                                <option value="TWD">TWD - Taiwan Dollar (NT$)</option>
+                                <option value="PKR">PKR - Pakistani Rupee (₨)</option>
+                                <option value="BDT">BDT - Bangladeshi Taka (৳)</option>
+                                <option value="LKR">LKR - Sri Lankan Rupee (Rs)</option>
+                            </optgroup>
+                            <optgroup label="European Currencies">
+                                <option value="NOK">NOK - Norwegian Krone (kr)</option>
+                                <option value="DKK">DKK - Danish Krone (kr)</option>
+                                <option value="PLN">PLN - Polish Złoty (zł)</option>
+                                <option value="CZK">CZK - Czech Koruna (Kč)</option>
+                                <option value="HUF">HUF - Hungarian Forint (Ft)</option>
+                                <option value="RON">RON - Romanian Leu (lei)</option>
+                                <option value="BGN">BGN - Bulgarian Lev (лв)</option>
+                                <option value="HRK">HRK - Croatian Kuna (kn)</option>
+                                <option value="RSD">RSD - Serbian Dinar (дин)</option>
+                                <option value="UAH">UAH - Ukrainian Hryvnia (₴)</option>
+                                <option value="RUB">RUB - Russian Ruble (₽)</option>
+                                <option value="TRY">TRY - Turkish Lira (₺)</option>
+                            </optgroup>
+                            <optgroup label="Middle East & Africa">
+                                <option value="AED">AED - UAE Dirham (د.إ)</option>
+                                <option value="SAR">SAR - Saudi Riyal (﷼)</option>
+                                <option value="QAR">QAR - Qatari Riyal (﷼)</option>
+                                <option value="KWD">KWD - Kuwaiti Dinar (د.ك)</option>
+                                <option value="BHD">BHD - Bahraini Dinar (.د.ب)</option>
+                                <option value="OMR">OMR - Omani Rial (﷼)</option>
+                                <option value="JOD">JOD - Jordanian Dinar (د.ا)</option>
+                                <option value="LBP">LBP - Lebanese Pound (ل.ل)</option>
+                                <option value="ILS">ILS - Israeli Shekel (₪)</option>
+                                <option value="EGP">EGP - Egyptian Pound (£)</option>
+                                <option value="ZAR">ZAR - South African Rand (R)</option>
+                                <option value="NGN">NGN - Nigerian Naira (₦)</option>
+                                <option value="KES">KES - Kenyan Shilling (KSh)</option>
+                                <option value="GHS">GHS - Ghanaian Cedi (₵)</option>
+                                <option value="MAD">MAD - Moroccan Dirham (د.م.)</option>
+                                <option value="TND">TND - Tunisian Dinar (د.ت)</option>
+                            </optgroup>
+                            <optgroup label="Americas">
+                                <option value="MXN">MXN - Mexican Peso ($)</option>
+                                <option value="BRL">BRL - Brazilian Real (R$)</option>
+                                <option value="ARS">ARS - Argentine Peso ($)</option>
+                                <option value="CLP">CLP - Chilean Peso ($)</option>
+                                <option value="COP">COP - Colombian Peso ($)</option>
+                                <option value="PEN">PEN - Peruvian Sol (S/)</option>
+                                <option value="UYU">UYU - Uruguayan Peso ($U)</option>
+                                <option value="BOB">BOB - Bolivian Boliviano (Bs.)</option>
+                                <option value="PYG">PYG - Paraguayan Guaraní (₲)</option>
+                                <option value="VES">VES - Venezuelan Bolívar (Bs.S)</option>
+                                <option value="GTQ">GTQ - Guatemalan Quetzal (Q)</option>
+                                <option value="CRC">CRC - Costa Rican Colón (₡)</option>
+                                <option value="DOP">DOP - Dominican Peso (RD$)</option>
+                                <option value="JMD">JMD - Jamaican Dollar (J$)</option>
+                            </optgroup>
+                            <optgroup label="Oceania">
+                                <option value="NZD">NZD - New Zealand Dollar (NZ$)</option>
+                                <option value="FJD">FJD - Fijian Dollar (FJ$)</option>
+                                <option value="PGK">PGK - Papua New Guinea Kina (K)</option>
+                                <option value="SBD">SBD - Solomon Islands Dollar (SI$)</option>
+                                <option value="VUV">VUV - Vanuatu Vatu (VT)</option>
+                                <option value="WST">WST - Samoan Tala (WS$)</option>
+                                <option value="TOP">TOP - Tongan Paʻanga (T$)</option>
+                            </optgroup>
+                            <optgroup label="Cryptocurrencies">
+                                <option value="BTC">BTC - Bitcoin (₿)</option>
+                                <option value="ETH">ETH - Ethereum (Ξ)</option>
+                                <option value="BNB">BNB - Binance Coin (BNB)</option>
+                                <option value="ADA">ADA - Cardano (₳)</option>
+                                <option value="DOT">DOT - Polkadot (DOT)</option>
+                                <option value="XRP">XRP - Ripple (XRP)</option>
+                                <option value="LTC">LTC - Litecoin (Ł)</option>
+                                <option value="BCH">BCH - Bitcoin Cash (BCH)</option>
+                                <option value="LINK">LINK - Chainlink (LINK)</option>
+                                <option value="MATIC">MATIC - Polygon (MATIC)</option>
+                            </optgroup>
+                        </select>
+                        <button onclick="convertCurrency()" class="btn-primary">Convert</button>
+                        <div class="conversion-result" id="conversion-result"></div>
+                        <div class="currency-info" id="currency-info"></div>
+                    </div>
+                    <div class="currency-chart">
+                        <canvas id="currency-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Budget Buddy</h3>
+                    <p>Your comprehensive global financial planning companion</p>
+                    <p>Supporting 100+ currencies and 200+ cities worldwide</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Multi-Currency Budget Planning</li>
+                        <li>Global Cost Comparison</li>
+                        <li>Savings Tracking</li>
+                        <li>Financial Education</li>
+                        <li>Real-time Currency Exchange</li>
+                        <li>Local Economic Impact</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Supported Regions</h4>
+                    <ul>
+                        <li>🇮🇳 India (90+ cities)</li>
+                        <li>🇺🇸 United States</li>
+                        <li>🇪🇺 Europe</li>
+                        <li>🇦🇺 Asia-Pacific</li>
+                        <li>🌍 Middle East & Africa</li>
+                        <li>🌎 Americas</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-github animated-social"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp animated-social"></i></a>
+                        <a href="#"><i class="fab fa-instagram animated-social"></i></a>
+                        <a href="#"><i class="fab fa-linkedin animated-social"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Budget Buddy. All rights reserved. | Supporting global financial planning with real-time data</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
